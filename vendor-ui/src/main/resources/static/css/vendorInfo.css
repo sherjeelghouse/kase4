@@ -1,0 +1,15 @@
+table, th , td  {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+          }
+          table tr:nth-child(odd) {
+            background-color: #f5f5f5;
+          }
+          table tr:nth-child(even) {
+            background-color: #ffffff;
+          }
+
+          .ng-cloak {
+                      display: none !important;
+                  }
