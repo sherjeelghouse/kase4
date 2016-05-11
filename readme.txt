@@ -1,6 +1,6 @@
 1. Start Redis from VM
 
-docker-compose.yml
+docker-compose up
 
 2. Build all projects 
     
