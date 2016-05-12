@@ -27,24 +27,21 @@
         </div>
         <button type="submit" class="btn btn-secondary">Submit</button>
         <br/><br/>
-
-        </div>
-
-        <div class="container">
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Phone</th>
-                </tr>
-                <tr ng-repeat="x in vendors">
-                    <td>{{ x.name }}</td>
-                    <td>{{ x.address }}</td>
-                    <td>{{ x.phone}}</td>
-                </tr>
-            </table>
-        </div>
-
+    </div>
+    <div class="container">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+            </tr>
+            <tr ng-repeat="x in vendors">
+                <td>{{x.name}}</td>
+                <td>{{x.address}}</td>
+                <td>{{x.phone}}</td>
+            </tr>
+        </table>
+    </div>
 </form>
 <script src="js/angular-bootstrap.js" type="text/javascript"></script>
 <script src="js/vendorInfo.js" type="text/javascript"></script>
