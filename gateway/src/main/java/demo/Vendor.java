@@ -14,6 +14,7 @@ public class Vendor implements Serializable {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -29,6 +30,7 @@ public class Vendor implements Serializable {
     public String getPhone() {
         return phone;
     }
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
