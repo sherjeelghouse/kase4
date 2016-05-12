@@ -1,3 +1,11 @@
+Pre-requisites
+
+Virtual Box and Docker
+
+IDE: IntelliJ or STS
+
+----------------------------------
+
 1. Start Redis from VM
 
 docker-compose up
