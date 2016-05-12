@@ -6,10 +6,16 @@ docker-compose up
     
 mvn clean package
 
-3. Start all apps and services
+3. Start gateway application
 
-4. Go to localhost:8080
+4. Start discovery application
 
-5. Login user/password
+5. Start vendor-service
 
-6. Go to Vendor app
+6. Start vendor-ui
+
+7. Go to localhost:8080
+
+8. Login user/password
+
+9. Go to Vendor app
