@@ -10,7 +10,9 @@
 
 	<modules>
 		<module>gateway</module>
+		<module>discovery</module>
 		<module>vendor-ui</module>
+		<module>vendor-service</module>
 		<module>admin</module>
 	</modules>
 	
