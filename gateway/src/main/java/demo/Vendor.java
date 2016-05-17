@@ -7,9 +7,20 @@ import java.io.Serializable;
  */
 public class Vendor implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private String name;
     private String address;
     private String phone;
+    private String identifier;
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
 
     public String getName() {
         return name;
