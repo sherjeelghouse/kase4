@@ -31,11 +31,13 @@
     <div class="container">
         <table>
             <tr>
+                <th>Id</th>
                 <th>Name</th>
                 <th>Address</th>
                 <th>Phone</th>
             </tr>
             <tr ng-repeat="x in vendors">
+                <td>{{x.identifier}}</td>
                 <td>{{x.name}}</td>
                 <td>{{x.address}}</td>
                 <td>{{x.phone}}</td>
