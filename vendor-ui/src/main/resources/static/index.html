@@ -18,18 +18,24 @@
         </div>
     </nav>
     <div class="container">
-        <h3>{{headerText}}</h3>
-
+        <h2>{{headerText}}</h2>
         <div class="form-group">
-            <p><label for="name">Name:</label> <input type="text" data-ng-model="name" id="name"></p>
-            <p><label for="address">Address:</label><input type="text" data-ng-model="address" id="address"></p>
-            <p><label for="phone">Phone: </label><input type="text" data-ng-model="phone" id="phone"></p>
+            <label for="name">Name</label>
+            <input type="text" class="form-control" data-ng-model="name" id="name">
         </div>
-        <button type="submit" class="btn btn-secondary">Submit</button>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" data-ng-model="address" id="address">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" data-ng-model="phone" id="phone">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
         <br/><br/>
     </div>
     <div class="container">
-        <table>
+        <table class="table table-striped">
             <tr>
                 <th>Id</th>
                 <th>Name</th>
