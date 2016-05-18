@@ -26,6 +26,7 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka-server</artifactId>
+			<version>1.0.0.BUILD-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
