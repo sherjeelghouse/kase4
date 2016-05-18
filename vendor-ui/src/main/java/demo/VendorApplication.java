@@ -38,7 +38,7 @@ public class VendorApplication {
 
     @Primary
     @Bean
-    RestTemplate restTemplate() {
+    private RestTemplate restTemplate() {
         return new RestTemplate();
     }
 
