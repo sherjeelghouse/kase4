@@ -1,7 +1,6 @@
 package demo;
 
 
-import org.apache.commons.lang.builder.ToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,16 +8,15 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Bean;
 
 import java.net.MalformedURLException;
 import java.security.Principal;
@@ -72,7 +70,6 @@ public class VendorApplication {
     public
     @ResponseBody
     List<Vendor> vendorInfo(@ModelAttribute("vendors") List<Vendor> vendors) {
-
         return vendors;
     }
 
@@ -80,45 +77,27 @@ public class VendorApplication {
     public
     @ResponseBody
     void addVendor(@ModelAttribute("vendors") List<Vendor> vendors, @RequestBody Vendor vendor) {
-
-        String serviceURL = serviceUrl();
-
-        String identifier = "";
-
-        try {
-            identifier = restTemplate().getForObject(serviceURL + "/vendor/idGenerator", String.class);
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        }
-
+        String identifier = restTemplate().getForObject(serviceUrl() + "/vendor/idGenerator", String.class);
         vendor.setIdentifier(identifier);
-
         vendors.add(vendor);
     }
 
     public String serviceUrl() {
-
-        discoveryClient.getInstances("vendor-service").forEach((ServiceInstance s) -> {
-            System.out.println("Service URL:" + ToStringBuilder.reflectionToString(s.getUri()));
-        });
-
         List<ServiceInstance> instances = discoveryClient.getInstances("vendor-service");
-        if (instances != null && instances.size() > 0) {
-            ServiceInstance s = instances.get(0);
-            System.out.println("Service URL:" + ToStringBuilder.reflectionToString(s.getUri()));
-            try {
-                return s.getUri().toURL().toString();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-        }
+        return toURLString(instances.stream().findFirst().get());
+    }
 
+    String toURLString(ServiceInstance server) {
+        try {
+            return server.getUri().toURL().toString();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @ModelAttribute("vendors")
     public List<Vendor> getFormData() {
-
         return new ArrayList<Vendor>();
     }
 
