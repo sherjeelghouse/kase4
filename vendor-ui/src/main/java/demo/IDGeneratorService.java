@@ -29,7 +29,7 @@ public class IDGeneratorService  {
         return identifier;
     }
 
-    private AtomicInteger atomicInteger;
+    private AtomicInteger atomicInteger = new AtomicInteger(1000);
 
     public String reliable(String serviceUrl) {
         return String.valueOf(atomicInteger.getAndIncrement());
