@@ -1,11 +1,13 @@
 package demo;
 
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @SpringBootApplication
 @RestController
@@ -41,6 +44,9 @@ public class VendorApplication {
     RestTemplate restTemplate() {
         return new RestTemplate();
     }
+
+    @Autowired
+    IDGeneratorService idGeneratorService;
 
     @RequestMapping("/user")
     public Map<String, String> user(Principal user) {
@@ -77,7 +83,7 @@ public class VendorApplication {
     public
     @ResponseBody
     void addVendor(@ModelAttribute("vendors") List<Vendor> vendors, @RequestBody Vendor vendor) {
-        String identifier = restTemplate().getForObject(serviceUrl() + "/vendor/idGenerator", String.class);
+        String identifier = idGeneratorService.generateIdentifier(serviceUrl());
         vendor.setIdentifier(identifier);
         vendors.add(vendor);
     }
