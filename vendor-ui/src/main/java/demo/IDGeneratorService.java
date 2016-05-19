@@ -25,7 +25,7 @@ public class IDGeneratorService  {
 
     @HystrixCommand(fallbackMethod = "reliable")
     public String generateIdentifier(String serviceUrl) {
-        String identifier = restTemplate().getForObject(serviceUrl + "/vendor/idGenerator", String.class);
+        String identifier = restTemplate().getForObject(serviceUrl, String.class);
         return identifier;
     }
 

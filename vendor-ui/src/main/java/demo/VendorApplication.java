@@ -83,7 +83,7 @@ public class VendorApplication {
     public
     @ResponseBody
     void addVendor(@ModelAttribute("vendors") List<Vendor> vendors, @RequestBody Vendor vendor) {
-        String identifier = idGeneratorService.generateIdentifier(serviceUrl());
+        String identifier = idGeneratorService.generateIdentifier(serviceUrl() + "/vendor/idGenerator");
         vendor.setIdentifier(identifier);
         vendors.add(vendor);
     }
