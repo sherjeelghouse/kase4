@@ -25,9 +25,8 @@ public class VendorServiceApplication {
 @RequestMapping("/vendor/idGenerator")
 class VendorService {
 
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE,  method = RequestMethod.GET)
-    String generateId() {
-
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    String idGenerator() {
         return UUID.randomUUID().toString();
     }
 }
