@@ -26,7 +26,7 @@ function($http, $scope) {
                 "address" : $scope.address,
                 "phone" : $scope.phone
             };
-            var response = $http.post('addVendor', vendor);
+            var response = $http.post('addVendor', JSON.stringify(vendor));
             response.success(function(data, status, headers, config) {
                 $scope.onAddVendorSuccess();
             });
