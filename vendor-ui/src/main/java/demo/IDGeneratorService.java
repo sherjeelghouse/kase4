@@ -23,7 +23,7 @@ public class IDGeneratorService  {
         return new RestTemplate();
     }
 
-    @HystrixCommand(fallbackMethod = "reliable")
+    @HystrixCommand(fallbackMethod = "resilient")
     public String generateIdentifier(String serviceUrl) {
         String identifier = restTemplate().getForObject(serviceUrl, String.class);
         return identifier;
@@ -31,7 +31,7 @@ public class IDGeneratorService  {
 
     private AtomicInteger atomicInteger = new AtomicInteger(1000);
 
-    public String reliable(String serviceUrl) {
+    public String resilient(String serviceUrl) {
         return String.valueOf(atomicInteger.getAndIncrement());
     }
 }
