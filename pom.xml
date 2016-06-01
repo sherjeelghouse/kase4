@@ -13,6 +13,7 @@
 		<module>discovery</module>
 		<module>vendor-ui</module>
 		<module>vendor-service</module>
+		<module>ledger</module>
 		<module>admin</module>
 	</modules>
 	
