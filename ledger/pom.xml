@@ -38,7 +38,7 @@
 					<dockerDirectory>src/main/docker</dockerDirectory>
 					<resources>
 						<resource>
-							<targetPath>/gs</targetPath>
+							<targetPath>/kase4</targetPath>
 							<directory>${project.build.directory}</directory>
 							<include>${project.build.finalName}.jar</include>
 						</resource>

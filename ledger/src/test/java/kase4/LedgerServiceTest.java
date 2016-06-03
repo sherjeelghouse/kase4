@@ -29,23 +29,18 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Basic integration tests for service demo application.
- *
- * @author Dave Syer
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest("server.port=0")
 @DirtiesContext
-public class HelloWorldConfigurationTests {
+public class LedgerServiceTest {
 
 	@Value("${local.server.port}")
 	private int port;
 
 	@Test
-	public void testGreeting() throws Exception {
+	public void get() throws Exception {
 		ResponseEntity<String> entity = new TestRestTemplate().getForEntity(
 				"http://localhost:" + this.port + "/", String.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
