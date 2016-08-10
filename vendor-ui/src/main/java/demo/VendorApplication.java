@@ -10,6 +10,7 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -26,27 +27,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @SpringBootApplication
 @RestController
 @EnableRedisHttpSession
 @EnableEurekaClient
-//@EnableFeignClients
+@EnableCircuitBreaker
 @SessionAttributes("vendors")
 public class VendorApplication {
 
     @Autowired
     private DiscoveryClient discoveryClient;
 
-    @Primary
-    @Bean
-    RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
     @Autowired
-    IDGeneratorService idGeneratorService;
+    private IDGeneratorService idGeneratorService;
 
     @RequestMapping("/user")
     public Map<String, String> user(Principal user) {
@@ -84,7 +78,9 @@ public class VendorApplication {
     @ResponseBody
     void addVendor(@ModelAttribute("vendors") List<Vendor> vendors, @RequestBody Vendor vendor) {
         String identifier = idGeneratorService.generateIdentifier(serviceUrl() + "/vendor/idGenerator");
+
         vendor.setIdentifier(identifier);
+
         vendors.add(vendor);
     }
 
@@ -107,4 +103,12 @@ public class VendorApplication {
         return new ArrayList<Vendor>();
     }
 
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    public String generateIdentifier(String serviceUrl) {
+        String identifier = restTemplate.getForObject(serviceUrl, String.class);
+        return identifier;
+    }
 }
