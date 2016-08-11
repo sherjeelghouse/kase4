@@ -15,6 +15,7 @@
 		<module>vendor-service</module>
 		<module>ledger</module>
 		<module>admin</module>
+		<module>hystrix-dashboard</module>
 	</modules>
 	
 </project>
