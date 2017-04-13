@@ -26,4 +26,6 @@ mvn clean package
 
 8. Login user/password
 
+
 9. Go to Vendor app
+
